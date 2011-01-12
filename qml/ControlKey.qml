@@ -12,7 +12,7 @@ Rectangle {
         y : 10
         width : 55
         height : 55
-        color : "#30333333"
+        color : "#20333333"
     }
 
     Rectangle {
@@ -21,7 +21,7 @@ Rectangle {
         y : 5
         width : 55
         height : 55
-        color : "#80222222"
+        color : "#60222222"
     }
 
     MouseArea {

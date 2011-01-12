@@ -4,7 +4,8 @@ from PySide import QtCore, QtGui, QtDeclarative
 import vk
 
 class Keyboard( QtGui.QWidget ) :
-    def __init__( self, parent = None ) :
+    toggled = QtCore.Signal()
+    def __init__( self, source, parent = None ) :
         #QtGui.QWidget.__init__( self,  parent, QtCore.Qt.X11BypassWindowManagerHint | QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.Popup )
         QtGui.QWidget.__init__( self,  parent, QtCore.Qt.X11BypassWindowManagerHint | QtCore.Qt.WindowStaysOnTopHint )
         #QtGui.QWidget.__init__( self,  parent, QtCore.Qt.Popup )
@@ -17,7 +18,7 @@ class Keyboard( QtGui.QWidget ) :
         self.view = QtDeclarative.QDeclarativeView( self )
         self.view.setAttribute( QtCore.Qt.WA_TranslucentBackground, True )
         self.view.setPalette( palette )
-        self.view.setSource( "qml/Keyboard.qml" )
+        self.view.setSource( source )
 
         context = self.view.rootContext()
         context.setContextProperty( "key", self )
@@ -44,13 +45,18 @@ class Keyboard( QtGui.QWidget ) :
             pass
         else :
             #print "longpress"
-            self.close()
+            pass
+    @QtCore.Slot()
+    def toggle( self ) :
+        self.toggled.emit()
 
 if __name__ == "__main__" :
     import sys
+    #import os
+    #os.system( "xkbcomp remap.xkb :0" )
     app = QtGui.QApplication( sys.argv )
 
-    kb = Keyboard()
+    kb = Keyboard( "qml/Keyboard.qml" )
     kb.show()
 
     sys.exit( app.exec_() )

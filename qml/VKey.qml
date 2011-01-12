@@ -3,36 +3,36 @@ import Qt.labs.gestures 1.0
 
 Rectangle {
     id : background
-    width : 80
+    width : 48
     height : 80
     color : "#00000000"
     property int keycode
     property string keysym
 
     Rectangle {
-        x : 10
-        y : 10
-        width : parent.width - 10
-        height : parent.height - 10
+        x : 6
+        y : 6
+        width : parent.width - 6
+        height : parent.height - 6
         color : "#30333333"
     }
 
     Rectangle {
         id : plat
-        x : 5
-        y : 5
-        width : parent.width - 10
-        height : parent.height - 10
+        x : 3
+        y : 3
+        width : parent.width - 6
+        height : parent.height - 6
         color : "#70222222"
 
         Text {
             id : code
             text : keysym
             color : "#70FFFFFF"
-            font.pointSize: 32; font.bold: true
+            font.pointSize: 20; font.bold: true
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.vericalCenter
-            y : 10
+            y : 20
         }
     }
 
@@ -46,7 +46,7 @@ Rectangle {
 
     states : State {
         name : "down" ; when : mouseArea.pressed == true
-        PropertyChanges { target : plat ; x : 10 ; y : 10 }
+        PropertyChanges { target : plat ; x : 6 ; y : 6 }
     }
 
     transitions : Transition {

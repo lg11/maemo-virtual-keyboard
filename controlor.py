@@ -3,6 +3,8 @@
 from PySide import QtCore, QtGui, QtDeclarative
 
 class Controlor( QtGui.QWidget ) :
+    clicked = QtCore.Signal()
+    longpressed = QtCore.Signal()
     def __init__( self, parent = None ) :
         QtGui.QWidget.__init__( self,  parent, QtCore.Qt.X11BypassWindowManagerHint | QtCore.Qt.WindowStaysOnTopHint )
 
@@ -33,10 +35,11 @@ class Controlor( QtGui.QWidget ) :
     @QtCore.Slot()
     def release( self ) :
         if self.timer.isActive() :
-            print "click"
+            self.clicked.emit()
+            #print "click"
         else :
-            print "longpress"
-            self.close()
+            self.longpressed.emit()
+            #print "longpress"
 
 if __name__ == "__main__" :
     import sys
